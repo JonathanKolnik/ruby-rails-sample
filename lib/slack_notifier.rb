@@ -1,5 +1,3 @@
-require "byebug"
-
 class SlackNotifier
   def self.announce(options, channel = "gif-of-the-week")
     notifier = Slack::Notifier.new(Rails.configuration.slack_url,
