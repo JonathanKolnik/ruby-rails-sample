@@ -5,7 +5,7 @@ class SlackNotifier
       username: "gifoftheweek")
 
     markup = {
-      text: "It's time to vote for Gif of the Week. Voting closes at 3:45pm.",
+      text: "It's time to vote for Gif of the Week.",
       attachments: options,
       replace_original: false
     }
@@ -14,8 +14,6 @@ class SlackNotifier
 
   def self.prepare
     gifs = Entry.where('created_at > ?', Date.current - 6.days)
-
-    message = "It's time to vote for Gif of the Week. Voting closes at 3:45pm."
 
     if gifs.any?
       options = self.options_json(gifs)
