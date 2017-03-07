@@ -3,15 +3,12 @@ class FogStorageHandler
     @bucket_name = bucket_name
   end
 
-  def put(local_path, key)
-    File.open(local_path) do |file|
-      bucket.files.create(
-        key: key,
-        body: file,
-        multipart_chunk_size: 5242880,
-        public: true
-      )
-    end
+  def put(file, key)
+    bucket.files.create(
+      key: key,
+      body: file,
+      multipart_chunk_size: 5242880
+    )
   end
 
   def get(key, &block)
