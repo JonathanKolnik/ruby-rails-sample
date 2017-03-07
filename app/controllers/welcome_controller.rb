@@ -8,7 +8,3 @@ class WelcomeController < ApplicationController
     @winner = Vote.select('entry_id, count(*)').where('created_at > ?', Date.current - 7.days).group('1').order('2 desc').first.entry
   end
 end
-
-def path(from, attachment)
-  [attachment.filename, from].join('-')
-end

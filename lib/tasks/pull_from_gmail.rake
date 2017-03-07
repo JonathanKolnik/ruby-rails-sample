@@ -26,3 +26,7 @@ task :pull_from_gmail => :environment do
     end
   end
 end
+
+def path(from, attachment)
+  [attachment.filename, from].join('-')
+end
