@@ -10,7 +10,7 @@ class VotesController < ApplicationController
       render json: { text: "C'mon, #{user}, you've already voted." }, status: :ok and return
     else
       Vote.create!(entry_id: gif[:name], user: user)
-      render json: { response_type: "ephemeral", replace_original: true, text: "Thank you #{user} for voting." }, status: :ok
+      render json: { text: "Thank you #{user} for voting." }, status: :ok
     end
   end
 end
