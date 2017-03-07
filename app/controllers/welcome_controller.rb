@@ -1,4 +1,3 @@
-
 require 's3_handler'
 class WelcomeController < ApplicationController
   def index
@@ -15,7 +14,6 @@ class WelcomeController < ApplicationController
         file = Tempfile.new([name_start, name_end], '/tmp', options)
         file.write(attachment.body.to_s.force_encoding("UTF-8").encode("UTF-8"))
         file.close
-        file.rewind
         key = file.path.split('/').third
         upload = s3.put file, key
       end
