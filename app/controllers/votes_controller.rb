@@ -5,6 +5,8 @@ class VotesController < ApplicationController
     response = JSON.parse(params[:payload])
     gif = response["actions"].first
     user = response["user"]["name"]
+    p gif
+    p gif[:name]
 
     if Vote.where(user: user).where(created_at: 1.day.ago..DateTime.current).any?
       render json: { replace_original: false, response_type: "ephemeral", text: "C'mon, #{user}, you've already voted." }, status: :ok and return

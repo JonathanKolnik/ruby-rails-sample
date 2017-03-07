@@ -26,6 +26,7 @@ class SlackNotifier
   def self.options_json(gifs)
     attachments = []
     gifs.each do |gif|
+      p "options #{gif.id}"
       attachments << {
         fallback: gif.image_url,
         image_url: gif.image_url,
