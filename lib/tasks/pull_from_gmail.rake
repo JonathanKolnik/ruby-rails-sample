@@ -23,12 +23,13 @@ task :pull_from_gmail => :environment do
         )
         Entry.create(name: from, image_url: upload.public_url)
       end
-      email.archive!
     end
+    email.archive!
   end
 
-  return unless Time.current.wday == 5
-  SlackNotifier.prepare
+  unless Time.current.wday == 5
+    SlackNotifier.prepare
+  end
 end
 
 def path(from, attachment)
