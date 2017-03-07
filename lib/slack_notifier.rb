@@ -27,14 +27,14 @@ class SlackNotifier
     attachments = []
     gifs.each do |gif|
       attachments << {
-        fallback: gif[:image_url],
-        image_url: gif[:image_url],
-        callback_id: gif[:id],
+        fallback: gif.image_url,
+        image_url: gif.image_url,
+        callback_id: gif.id,
         color: "#3AA3E3",
         attachment_type: "default",
         actions: [
           {
-            name: gif[:id],
+            name: gif.id,
             text: "Vote",
             type: "button",
             value: "yes",
