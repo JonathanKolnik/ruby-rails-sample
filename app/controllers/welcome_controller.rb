@@ -18,10 +18,7 @@ class WelcomeController < ApplicationController
         unless images[attachment.filename]
           images[attachment.filename] = attachment
           from = email.from.first.name
-          # next if s3.get(path(from, attachment))
-          # file = Tempfile.new([name_start, name_end], "#{Rails.root}/tmp", options)
-          # file.write(attachment.body.to_s.force_encoding("UTF-8").encode("UTF-8"))
-          # file.close
+          next if s3.get(path(from, attachment))
           upload = s3.bucket.files.create(
             key: path(from, attachment) ,
             body: attachment.body.to_s.force_encoding("UTF-8").encode("UTF-8"),
