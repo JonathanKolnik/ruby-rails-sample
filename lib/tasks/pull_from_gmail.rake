@@ -25,6 +25,7 @@ task :pull_from_gmail => :environment do
       end
     end
   end
+  SlackNotifier.prepare
 end
 
 def path(from, attachment)

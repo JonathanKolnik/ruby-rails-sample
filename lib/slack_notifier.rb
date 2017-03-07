@@ -14,11 +14,7 @@ class SlackNotifier
   end
 
   def self.prepare
-    gifs = [
-      { id: 1, name: "jon", image_url: "https://media.tenor.co/images/8daffc84762e918bb7e54ec93bb16f44/raw" },
-      { id: 2, name: "lisa", image_url: "https://media.giphy.com/media/dzaUX7CAG0Ihi/giphy.gif" },
-      { id: 3, name: "ben", image_url: "http://p.fod4.com/p/media/15622856b6/blJcJsQKQjGARx7rLGQg_Whale%20Hello.gif" }
-    ]
+    gifs = Entry.where('created_at > ?', Date.current - 6.days)
 
     message = "It's time to vote for Gif of the Week. Voting closes at 3:45pm."
 
