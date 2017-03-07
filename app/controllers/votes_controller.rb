@@ -7,10 +7,10 @@ class VotesController < ApplicationController
     user = response["user"]["name"]
 
     if Vote.where(user: user).where(created_at: 1.day.ago..DateTime.current).any?
-      render json: { text: "C'mon, #{user}, you've already voted." }, status: :ok and return
+      render json: { replace_original: false, response_type: "ephemeral", text: "C'mon, #{user}, you've already voted." }, status: :ok and return
     else
       Vote.create!(entry_id: gif[:name], user: user)
-      render json: { text: "Thank you #{user} for voting." }, status: :ok
+      render json: { replace_original: false, response_type: "ephemeral", text: "Thank you #{user} for voting." }, status: :ok
     end
   end
 end
