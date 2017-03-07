@@ -6,7 +6,10 @@ class SlackNotifier
       channel: channel,
       username: "gifoftheweek")
 
-    markup = { text: "It's time to vote for Gif of the Week. Voting closes at 3:45pm.", attachments: options }
+    markup = {
+      text: "It's time to vote for Gif of the Week. Voting closes at 3:45pm.",
+      attachments: options,
+    }
     notifier.post markup
   end
 
