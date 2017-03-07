@@ -9,6 +9,7 @@ class SlackNotifier
     markup = {
       text: "It's time to vote for Gif of the Week. Voting closes at 3:45pm.",
       attachments: options,
+      replace_original: false
     }
     notifier.post markup
   end
@@ -35,7 +36,7 @@ class SlackNotifier
         attachment_type: "default",
         actions: [
           {
-            name: "gif #{gif[:image_url]}",
+            name: gif[:id],
             text: "Vote",
             type: "button",
             value: "yes",
