@@ -14,6 +14,10 @@ class FogStorageHandler
     end
   end
 
+  def get(key, &block)
+    bucket.files.get(key, &block)
+  end
+
   def bucket
     @bucket ||= connection.directories.get(@bucket_name)
   end

@@ -18,11 +18,11 @@ class WelcomeController < ApplicationController
         unless images[attachment.filename]
           images[attachment.filename] = attachment
           from = email.from.first.name
-          file = Tempfile.new([name_start, name_end], '/tmp', options)
+          next if s3.get(path(from, attachment))
+          file = Tempfile.new([name_start, name_end], "#{Rails.root}/tmp", options)
           file.write(attachment.body.to_s.force_encoding("UTF-8").encode("UTF-8"))
           file.close
-          key = file.path.split('/').third
-          upload = s3.put file, key
+          upload = s3.put file, path(from, attachment)
           Entry.create(name: from, image_url: upload.public_url)
         end
       end
@@ -30,3 +30,6 @@ class WelcomeController < ApplicationController
   end
 end
 
+def path(from, attachment)
+  [attachment.filename, from].join('-')
+end
