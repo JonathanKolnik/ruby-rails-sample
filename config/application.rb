@@ -8,6 +8,7 @@ Bundler.require(*Rails.groups)
 
 module RubyRailsSample
   class Application < Rails::Application
+    config.autoload_paths += %W(#{config.root}/lib)
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -22,5 +23,6 @@ module RubyRailsSample
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    config.slack_url = 'https://hooks.slack.com/services/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'
   end
 end
