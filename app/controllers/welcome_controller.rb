@@ -1,7 +1,7 @@
 require 's3_handler'
 class WelcomeController < ApplicationController
   def index
-    @entries = Entry.all
+    @entries = Entry.where('created_at > ?', Date.current - 7.days)
   end
 
   def pull_from_gmail
