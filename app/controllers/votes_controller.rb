@@ -3,6 +3,7 @@ class VotesController < ApplicationController
 
   def create
     p params[:payload]
+    p JSON.parse(params[:payload])
 
     render json: { response_type: "ephemeral", replace_original: true, text: "Thank you for voting." }, status: :ok
   end

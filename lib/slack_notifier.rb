@@ -9,6 +9,8 @@ class SlackNotifier
     markup = {
       text: "It's time to vote for Gif of the Week. Voting closes at 3:45pm.",
       attachments: options,
+      response_type: "ephemeral",
+      replace_original: true
     }
     notifier.post markup
   end
