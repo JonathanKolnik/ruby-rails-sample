@@ -6,7 +6,7 @@ task :pull_from_gmail => :environment do
   name_end = '.gif'
   options = { encoding: Encoding::UTF_8 }
 
-  gmail = Gmail.connect('jonathan@bookbub.com', ENV['GMAIL_PASSWORD'])
+  gmail = Gmail.connect(ENV['GMAIL_EMAIL'], ENV['GMAIL_PASSWORD'])
   images = {}
   gmail.inbox.emails(:to => "coolcats@bookbub.com").reverse.map do |email|
     attachment = email.message.attachments.first
@@ -25,6 +25,10 @@ task :pull_from_gmail => :environment do
       end
     end
   end
+  SlackNotifier.prepare
+end
+
+task :notify_slack => :environment do
   SlackNotifier.prepare
 end
 

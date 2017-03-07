@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>RubyRailsSample</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>Gif of the Week</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
 
-<%= yield %>
+    <%= image_tag('BB_Logo.jpg', width: 200) %>
+    <%= yield %>
 
-</body>
+    <div class='credits'>
+      Powered by GifBot - BubHack March 2017
+      <br/>
+      Lisa Plesko & Jon Kolnik
+    </div>
+  </body>
 </html>

@@ -5,6 +5,6 @@ class WelcomeController < ApplicationController
   end
 
   def winner
-    @winner = Vote.select('entry_id, count(*)').where('created_at > ?', Date.current - 6.days).group('1').order('2 desc').first.entry
+    @entries = Vote.select('entry_id, count(*)').where('created_at > ?', Date.current - 6.days).group('1').order('2 desc')
   end
 end

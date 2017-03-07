@@ -1,7 +1,15 @@
 <div class='winner'>
-<h1>WINNER: <%=@winner.name %></h1>
-<img src='<%="#{@winner.image_url}"%>'/>
-
+  <%- @entries.each.with_index do |entry, index| %>
+    <%- if index == 0  %>
+      <h1> Winner! </h1>
+    <%- end %>
+    <h2><%=entry.entry.name %></h2>
+    <h3><%=entry['count'] %> votes</h3>
+    <img src='<%="#{entry.entry.image_url}"%>'/>
+    <%- if index == 1  %>
+      <h1> Runner Ups</h1>
+    <%- end %>
+  <%- end %>
 
 
 
@@ -13,7 +21,7 @@
 
 
 <div class='credits'>
-Powered by GifBot - BubHack March 2017
+  Powered by GifBot - BubHack March 2017
 <br/>
 Lisa Plesko & Jon Kolnik
 </div>
