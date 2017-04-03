@@ -17,6 +17,7 @@ task :pull_from_gmail => :environment do
     html_regex = /src=\"(.*?)\".*/
     src = html_regex.match(body).try(:captures).try(:first)
     from = email.from.first.name
+    if src
     if !src.include?('.gif')
       content_id = src.split(':').second
       attachment = email.attachments.find{|a| a.content_id == "<#{content_id}>"}
@@ -36,6 +37,7 @@ task :pull_from_gmail => :environment do
       end
     else
       Entry.create(name: from, image_url: src)
+    end
     end
   end
 
