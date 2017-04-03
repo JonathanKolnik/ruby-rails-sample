@@ -13,7 +13,7 @@ task :pull_from_gmail => :environment do
     html_regex = /<img src=\"(.*?)\".*>/
     src = html_regex.match(body).captures.first
     p src
-    if !src.include('.gif')
+    if !src.include?('.gif')
       content_id = src.split(':').second
       attachment = email.attachments.find{|a| a.content_id == "<#{content_id}>"}
 
