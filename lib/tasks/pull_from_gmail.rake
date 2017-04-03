@@ -17,6 +17,7 @@ task :pull_from_gmail => :environment do
     html_regex = /src=\"(.*?)\".*/
     src = html_regex.match(body).try(:captures).try(:first)
     from = email.from.first.name
+    date = email.date
     if src
     if !src.include?('.gif')
       content_id = src.split(':').second
@@ -32,11 +33,11 @@ task :pull_from_gmail => :environment do
             multipart_chunk_size: 5242880,
             public: true
           )
-          Entry.create(name: from, image_url: upload.public_url)
+          Entry.create(name: from, image_url: upload.public_url, created_at: date)
         end
       end
     else
-      Entry.create(name: from, image_url: src)
+      Entry.create(name: from, image_url: src, created_at: date)
     end
     end
   end
