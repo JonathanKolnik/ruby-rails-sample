@@ -15,7 +15,7 @@ task :pull_from_gmail => :environment do
       body = email.parts.second.body.decoded
     end
     html_regex = /src=\"(.*?)\".*/
-    src = html_regex.match(body).captures.first
+    src = html_regex.match(body).try(:captures).try(:first)
     from = email.from.first.name
     if !src.include?('.gif')
       content_id = src.split(':').second
