@@ -12,7 +12,7 @@ task :pull_from_gmail => :environment do
     body = email.parts.first.parts.second.body.decoded
     html_regex = /<img src=\"(.*?)\".*>/
     src = html_regex.match(body).captures.first
-    p src
+    from = email.from.first.name
     if !src.include?('.gif')
       content_id = src.split(':').second
       attachment = email.attachments.find{|a| a.content_id == "<#{content_id}>"}
@@ -20,7 +20,6 @@ task :pull_from_gmail => :environment do
       if attachment && /\.gif/ =~ attachment.filename
         unless images[attachment.filename]
           images[attachment.filename] = attachment
-          from = email.from.first.name
           next if s3.get(path(from, attachment))
           upload = s3.bucket.files.create(
             key: path(from, attachment),
@@ -28,7 +27,6 @@ task :pull_from_gmail => :environment do
             multipart_chunk_size: 5242880,
             public: true
           )
-          p upload.public_url
           Entry.create(name: from, image_url: upload.public_url)
         end
       end
