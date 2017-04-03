@@ -9,8 +9,8 @@ task :pull_from_gmail => :environment do
   gmail = Gmail.connect(ENV['GMAIL_EMAIL'], ENV['GMAIL_PASSWORD'])
   images = {}
   gmail.inbox.emails(:to => "coolcats@bookbub.com").reverse.map do |email|
-    body = email.parts.first.parts.second.body.decoded
-    html_regex = /<img src=\"(.*?)\".*>/
+    body = email.parts.first.parts.second.try(:body).decoded
+    html_regex = /src=\"(.*?)\".*/
     src = html_regex.match(body).captures.first
     from = email.from.first.name
     if !src.include?('.gif')
