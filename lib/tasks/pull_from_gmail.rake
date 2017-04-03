@@ -9,7 +9,11 @@ task :pull_from_gmail => :environment do
   gmail = Gmail.connect(ENV['GMAIL_EMAIL'], ENV['GMAIL_PASSWORD'])
   images = {}
   gmail.inbox.emails(:to => "coolcats@bookbub.com").reverse.map do |email|
-    body = email.parts.first.parts.second.try(:body).decoded
+    if body = email.parts.first.parts.second
+      body = body.body.decoded
+    else
+      body = email.parts.second.body.decoded
+    end
     html_regex = /src=\"(.*?)\".*/
     src = html_regex.match(body).captures.first
     from = email.from.first.name
