@@ -23,6 +23,6 @@ module RubyRailsSample
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
-    config.slack_url = 'https://hooks.slack.com/services/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'
+    config.slack_url = 'https://hooks.slack.com/services/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'
   end
 end
